@@ -14,10 +14,10 @@ const { NotImplementedError } = require('../extensions/index.js');
 function getSeason(d) {
   if (d == undefined) {
     return 'Unable to determine the time of year!'
-  } if (Object.prototype.toString.call(d) !== "[object Date]" || !(d instanceof Date) || !(d.getFullYear && typeof d.getFullYear === 'function')) {
+  } if (Object.prototype.toString.call(d) !== "[object Date]" || Object.getOwnPropertyNames(d).length) {
     throw new Error('Invalid date!')
   }
-git
+
  
   var seasonArray = [
     {name: 'spring', date: new Date(d.getFullYear(),2,1).getTime()},
