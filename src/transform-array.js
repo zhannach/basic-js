@@ -17,21 +17,36 @@ function transform(arr) {
   if (!Array.isArray(arr)) {
     throw new Error ("'arr' parameter must be an instance of the Array!")
   }
-  let newArr = []
+  if (arr.length === 0) {
+    return arr;
+  }
+  const newArr = []
   for (let i = 0; i < arr.length; i++) {
-     if (arr[i] === '--discard-next') {
-      newArr = arr.splice(arr[i+1], 1)
-     }
-     if (arr[i] === '--discard-prev') {
-      newArr = arr.splice(arr[i], 1)
-     }
-     if (arr[i] === '--double-next') {
-      newArr = arr.splice(arr[i+1], 0, arr[i+1])
-     }
-     if (arr[i] === '--double-prev') {
-      newArr = arr.splice(arr[i-1], 0, arr[i-1])
-     }
-  } return newArr
+      if (arr[i] === '--discard-next' && i === arr.length - 1) {
+          continue;
+      } else if (arr[i] === '--discard-next') {
+          i++;
+      } else if (arr[i] === '--discard-prev' && i === 0) {
+          continue;
+      } else if (arr[i] === '--discard-prev' && arr[i - 2] === '--discard-next') {
+          continue;
+      } else if (arr[i] === '--discard-prev') {
+          newArr.pop();
+      } else if (arr[i] === '--double-next' && i !== arr.length - 1) {
+          newArr.push(arr[i + 1]); 
+      } else if (arr[i] === '--double-next' && i === arr.length - 1) {
+          continue;
+      } else if (arr[i] === '--double-prev' && i === 0) {
+          continue;
+      } else if (arr[i] === '--double-prev' && arr[i - 2] === '--discard-next') {
+          continue;
+      } else if (arr[i] === '--double-prev') {
+          newArr.push(arr[i - 1]);
+      } else {
+          newArr.push(arr[i]);
+      }
+  };
+  return newArr;
 }
 
 module.exports = {

@@ -18,8 +18,8 @@ const { NotImplementedError } = require('../extensions/index.js');
  */
 function getMatrixElementsSum(matrix) {
   let sum = 0
-  let column = matrix[0].length
-  for (let i = 0; i < column.length; i++) {
+  let rowLen = matrix[0].length
+  for (let i = 0; i < rowLen; i++) {
     for (let j = 0; j < matrix.length; j++) {
       if (matrix[j][i] === 0) {
         break
