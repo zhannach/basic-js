@@ -1,6 +1,3 @@
-
-const mlog = require('mocha-logger')
-
 const { NotImplementedError } = require('../extensions/index.js');
 
 /**
